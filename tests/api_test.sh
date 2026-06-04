@@ -2,7 +2,7 @@
 
 # CareTrack Clinic - Automated API Verification Suite
 
-PORT=5000
+PORT=5001
 API_URL="http://localhost:$PORT/api"
 
 # Text Colors
@@ -23,7 +23,7 @@ if [ $? -ne 0 ]; then
   npm run start > server_test.log 2>&1 &
   SERVER_PID=$!
   # Wait for server to boot
-  sleep 2
+  sleep 3
 else
   echo -e "${GREEN}Detected running server on port $PORT.${NC}"
 fi
