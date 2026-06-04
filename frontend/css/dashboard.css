@@ -1,0 +1,351 @@
+/*
+ * CareTrack Clinic - Dashboard & Specialty Layouts
+ * SaaS Widgets, Timelines, Profile grids
+ */
+
+/* Statistics Widgets Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* Stat color variants */
+.stat-doctors .stat-icon {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--color-primary);
+}
+
+.stat-patients .stat-icon {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.stat-diagnoses .stat-icon {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.stat-users .stat-icon {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.stat-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Dashboard Columns Grid Split */
+.dashboard-sections {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.section-title svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Recent Activity Stream Feed */
+.activity-feed {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.activity-feed::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background-color: var(--border-color);
+  z-index: 1;
+}
+
+.activity-item {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.activity-bullet {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.activity-bullet svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Activity Bullet Variants */
+.bullet-doctor {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.bullet-patient {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.bullet-diagnosis {
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+}
+
+.activity-content {
+  flex: 1;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.activity-item:hover .activity-content {
+  background-color: var(--bg-card);
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.activity-action {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+}
+
+.activity-time {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.activity-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.activity-subtitle {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+}
+
+/* Double column Patient Profile details */
+.patient-profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.patient-meta-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.patient-big-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.patient-info-list {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patient-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.patient-info-item span:first-child {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.patient-info-item span:last-child {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Diagnosis History Timeline List */
+.diagnosis-timeline {
+  position: relative;
+  padding-left: 20px;
+}
+
+.diagnosis-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background-color: var(--border-color);
+}
+
+.timeline-node {
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.timeline-node::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 14px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  border: 2px solid var(--border-color);
+  z-index: 2;
+}
+
+/* Timeline status colors */
+.node-low::before { border-color: var(--color-success); background-color: var(--color-success); }
+.node-medium::before { border-color: var(--color-warning); background-color: var(--color-warning); }
+.node-high::before { border-color: var(--color-danger); background-color: var(--color-danger); }
+.node-critical::before { border-color: #7f1d1d; background-color: #7f1d1d; }
+
+.timeline-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  transition: all 0.2s ease, background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.timeline-card:hover {
+  background-color: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.timeline-code {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: rgba(37, 99, 235, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.timeline-date {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 12px;
+}
+
+/* Small screen stacking */
+@media (max-width: 992px) {
+  .dashboard-sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .patient-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

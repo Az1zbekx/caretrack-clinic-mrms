@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1d8bf69e-5d1b-4f81-807d-30424564c781",
+    "username": "admin",
+    "password": "$2b$10$ceqSPY8ijTWy16qd919WwefWibvYIxJDhFzQEzRH9nGMjDDjZu8aC",
+    "role": "Administrator",
+    "created_at": "2026-06-05T02:30:00.000Z"
+  },
+  {
+    "id": "2c6bf69e-5d1b-4f81-807d-30424564c782",
+    "username": "clinician",
+    "password": "$2b$10$vx7lOnjxArHyG0ncdM8pYuhUPn6U/lpzLOKq0J5U3vzZxpn.S3A4C",
+    "role": "Clinician",
+    "created_at": "2026-06-05T02:30:00.000Z"
+  },
+  {
+    "id": "3a6bf69e-5d1b-4f81-807d-30424564c783",
+    "username": "receptionist",
+    "password": "$2b$10$GcswInyHhnkioX4ODp4f2.0KUextoDnD2ihm3fZhezqXx6G.dpDba",
+    "role": "Receptionist",
+    "created_at": "2026-06-05T02:30:00.000Z"
+  }
+]

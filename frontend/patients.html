@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareTrack Clinic - Patient Registry</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+  <div id="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">CT</div>
+        <div class="logo-text">
+          <h2>CareTrack</h2>
+          <span>Clinic Registry</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a href="/dashboard.html" class="menu-item">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+        <a href="/doctors.html" class="menu-item">
+          <i class="fa-solid fa-user-doctor"></i> Doctors
+        </a>
+        <a href="/patients.html" class="menu-item active">
+          <i class="fa-solid fa-hospital-user"></i> Patients
+        </a>
+        <a href="/diagnoses.html" class="menu-item" id="menu-diagnoses">
+          <i class="fa-solid fa-file-medical"></i> Diagnoses
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-badge">
+          <div class="user-avatar" id="nav-avatar">U</div>
+          <div class="user-info">
+            <span class="user-name" id="nav-username">Loading...</span>
+            <span class="user-role" id="nav-role">Role</span>
+          </div>
+        </div>
+        <button class="btn-logout" id="btn-logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="top-navbar">
+        <div class="page-title">
+          <h1>Patients Registry</h1>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <div class="action-header">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search-patients" class="form-control" placeholder="Search by name, phone or assigned doctor...">
+          </div>
+          <!-- Add Patient Button (Admin and Receptionist) -->
+          <button class="btn-mrms btn-primary" id="btn-open-patient-modal" style="display: none;">
+            <i class="fa-solid fa-user-plus"></i> Admit Patient
+          </button>
+        </div>
+
+        <div class="card-glass">
+          <div class="table-responsive">
+            <table class="mrms-table" id="patients-table">
+              <thead>
+                <tr>
+                  <th>Full Name</th>
+                  <th>Age</th>
+                  <th>Gender</th>
+                  <th>Phone</th>
+                  <th>Assigned Doctor</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="patients-table-body">
+                <tr>
+                  <td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading patient registry...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Patient Admissions / Edit Modal -->
+  <div class="modal-backdrop" id="patient-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="patient-modal-title">Admit Patient</h3>
+        <button class="modal-close" id="btn-close-patient-modal">&times;</button>
+      </div>
+      <form id="patient-form">
+        <div class="modal-body">
+          <input type="hidden" id="patient-id">
+          
+          <div class="form-group">
+            <label for="pat-name">Full Name</label>
+            <input type="text" id="pat-name" class="form-control" placeholder="e.g. Alice Johnson" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label for="pat-age">Age</label>
+              <input type="number" id="pat-age" class="form-control" min="0" max="125" placeholder="e.g. 34" required>
+            </div>
+
+            <div class="form-group">
+              <label for="pat-gender">Gender</label>
+              <select id="pat-gender" class="form-control" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="pat-phone">Phone Number</label>
+            <input type="text" id="pat-phone" class="form-control" placeholder="e.g. +998931112233" required>
+          </div>
+
+          <div class="form-group">
+            <label for="pat-address">Residential Address</label>
+            <input type="text" id="pat-address" class="form-control" placeholder="e.g. Tashkent, Uzbekistan" required>
+          </div>
+
+          <div class="form-group">
+            <label for="pat-doctor">Assigned Doctor</label>
+            <select id="pat-doctor" class="form-control" required>
+              <option value="" disabled selected>Assign a Doctor</option>
+              <!-- Populate dynamically -->
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-mrms btn-secondary" id="btn-cancel-patient-form">Cancel</button>
+          <button type="submit" class="btn-mrms btn-primary" id="btn-save-patient">Save Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Comprehensive Patient Profile Modal (Details + Diagnosis History + Action triggers) -->
+  <div class="modal-backdrop" id="profile-modal">
+    <div class="modal-container" style="max-width: 800px;">
+      <div class="modal-header">
+        <h3>Patient Profile Workspace</h3>
+        <button class="modal-close" id="btn-close-profile-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="patient-profile-grid">
+          <!-- Left Column: Details -->
+          <div class="patient-meta-card">
+            <div class="patient-big-avatar" id="prof-avatar">A</div>
+            <h3 id="prof-name" style="color: #fff; font-size: 1.25rem;">Patient Name</h3>
+            
+            <div class="patient-info-list">
+              <div class="patient-info-item">
+                <span>Age / Sex</span>
+                <span id="prof-age-gender">Loading...</span>
+              </div>
+              <div class="patient-info-item">
+                <span>Phone</span>
+                <span id="prof-phone">Loading...</span>
+              </div>
+              <div class="patient-info-item">
+                <span>Address</span>
+                <span id="prof-address">Loading...</span>
+              </div>
+              <div class="patient-info-item">
+                <span>Assigned Doctor</span>
+                <span id="prof-doctor" style="color: var(--color-secondary);">Loading...</span>
+              </div>
+            </div>
+
+            <!-- Profile Actions -->
+            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 15px;">
+              <button class="btn-mrms btn-secondary" id="prof-btn-edit" style="width: 100%;">
+                <i class="fa-solid fa-user-pen"></i> Edit Patient Details
+              </button>
+              <button class="btn-mrms btn-danger" id="prof-btn-delete" style="width: 100%;">
+                <i class="fa-solid fa-trash"></i> Delete Patient Record
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Diagnoses timeline -->
+          <div>
+            <div class="flex-between mb-4">
+              <h4 style="color: #fff; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-notes-medical" style="color: var(--color-success);"></i> Diagnosis History
+              </h4>
+              <!-- Add Diagnosis Button -->
+              <button class="btn-mrms btn-primary" id="prof-btn-add-diagnosis" style="padding: 6px 12px; font-size: 0.8rem;">
+                <i class="fa-solid fa-plus"></i> Add Diagnosis
+              </button>
+            </div>
+
+            <div class="diagnosis-timeline" id="prof-diagnoses-timeline">
+              <!-- Dynamically populated diagnoses -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Diagnosis Modal (Clinician / Admin only) -->
+  <div class="modal-backdrop" id="diagnosis-modal">
+    <div class="modal-container" style="max-width: 500px; z-index: 1100;">
+      <div class="modal-header">
+        <h3>Record Diagnosis</h3>
+        <button class="modal-close" id="btn-close-diagnosis-modal">&times;</button>
+      </div>
+      <form id="diagnosis-form">
+        <div class="modal-body">
+          <input type="hidden" id="diag-patient-id">
+          
+          <div class="form-group">
+            <label for="diag-patient-name">Patient</label>
+            <input type="text" id="diag-patient-name" class="form-control" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="diag-icd">ICD-10 Code</label>
+            <input type="text" id="diag-icd" class="form-control" placeholder="e.g. I10 or E11.9" required>
+          </div>
+
+          <div class="form-group">
+            <label for="diag-severity">Severity Level</label>
+            <select id="diag-severity" class="form-control" required>
+              <option value="" disabled selected>Select Severity</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="diag-desc">Clinical Description</label>
+            <textarea id="diag-desc" class="form-control" rows="4" placeholder="Enter clinical notes, symptoms, or findings..." required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-mrms btn-secondary" id="btn-cancel-diagnosis-form">Cancel</button>
+          <button type="submit" class="btn-mrms btn-primary">Save Diagnosis</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <div id="loader-overlay" class="loader-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/patients.js"></script>
+</body>
+</html>

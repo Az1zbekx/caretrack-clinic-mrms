@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    // Client-side authentication check & router redirection
+    const token = localStorage.getItem('token');
+    if (token) {
+      window.location.href = '/dashboard.html';
+    } else {
+      window.location.href = '/login.html';
+    }
+  </script>
+</head>
+<body>
+  <div style="font-family: sans-serif; text-align: center; margin-top: 100px; color: #64748b;">
+    <p>Loading secure portal session...</p>
+  </div>
+</body>
+</html>

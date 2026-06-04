@@ -1,0 +1,12 @@
+[
+  {
+    "id": "b642a8b9-53e3-4de7-91eb-7253457a4123",
+    "full_name": "Alice Johnson",
+    "age": 34,
+    "gender": "Female",
+    "phone": "+998931112233",
+    "address": "Tashkent, Uzbekistan",
+    "doctor_id": "d9426f87-bd7d-4b95-a4bc-b1c1e54a49c9",
+    "created_at": "2026-06-05T02:35:00.000Z"
+  }
+]
