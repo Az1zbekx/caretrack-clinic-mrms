@@ -1,3 +1,27 @@
+# Dependencies
 node_modules/
+*/node_modules/
+
+# Local databases
+*.sqlite
+*.sqlite3
+backend/database.sqlite
+
+# Production build artifacts
+dist/
+*/dist/
+
+# Environment variables
 .env
-npm-debug.log
+*/.env
+*.env.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
