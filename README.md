@@ -1,5 +1,7 @@
 # 🏥 CareTrack: Enterprise Clinic Medical Records Management System (MRMS)
 
+[![CI](https://github.com/Az1zbekx/caretrack-clinic-mrms/actions/workflows/ci.yml/badge.svg)](https://github.com/Az1zbekx/caretrack-clinic-mrms/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 [![React](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Vite-61DAFB.svg?logo=react&logoColor=black)](https://react.dev)
 [![Node.js](https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-339933.svg?logo=node.js&logoColor=white)](https://nodejs.org)
 [![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS-38B2AC.svg?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
